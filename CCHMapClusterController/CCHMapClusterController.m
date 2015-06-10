@@ -56,6 +56,7 @@
 @property (nonatomic) id<MKAnnotation> annotationToSelect;
 @property (nonatomic) CCHMapClusterAnnotation *mapClusterAnnotationToSelect;
 @property (nonatomic) MKCoordinateSpan regionSpanBeforeChange;
+@property (nonatomic) double mapZoomBeforeChange;
 @property (nonatomic, getter = isRegionChanging) BOOL regionChanging;
 @property (nonatomic) id<CCHMapClusterer> strongClusterer;
 @property (nonatomic) id<CCHMapAnimator> strongAnimator;
@@ -276,12 +277,19 @@
 {
     self.regionSpanBeforeChange = mapView.region.span;
     self.regionChanging = YES;
+    self.mapZoomBeforeChange = [self zoomLevel];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     self.regionChanging = NO;
-    
+    double smallValue = 0.000001;
+    if(fabs([self zoomLevel] - self.mapZoomBeforeChange) < smallValue)
+    {
+        NSLog(@"Zoom level is the same. No need to change clusters");
+        return;
+    }
+
     // Update annotations
     [self updateAnnotationsWithCompletionHandler:^{
         if (self.annotationToSelect) {
