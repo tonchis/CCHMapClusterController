@@ -282,13 +282,6 @@
 {
     self.regionChanging = NO;
     
-    // Deselect all annotations when zooming in/out. Longitude delta will not change
-    // unless zoom changes (in contrast to latitude delta).
-    BOOL hasZoomed = !fequal(mapView.region.span.longitudeDelta, self.regionSpanBeforeChange.longitudeDelta);
-    if (hasZoomed) {
-        [self deselectAllAnnotations];
-    }
-    
     // Update annotations
     [self updateAnnotationsWithCompletionHandler:^{
         if (self.annotationToSelect) {
