@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name     = 'CCHMapClusterController'
-  spec.version  = '1.6.6'
+  spec.version  = '1.7.0'
   spec.license  = 'MIT'
   spec.summary  = 'High-performance map clustering with MapKit for iOS and OS X. Integrate with 4 lines of code.'
   spec.homepage = 'https://github.com/choefele/CCHMapClusterController'
@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
   spec.frameworks = 'MapKit', 'CoreLocation'
   spec.requires_arc = true
 
-  spec.ios.deployment_target = '6.0'
+  spec.ios.deployment_target = '7.0'
   spec.osx.deployment_target = '10.9'
 
   spec.source_files = 'CCHMapClusterController/*.{h,m}'
